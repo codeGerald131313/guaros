@@ -24,13 +24,13 @@ export default {
       { rel: 'preconnect', href: 'https://fonts.gstatic.com/' },
       { rel: 'stylesheet', href: 'css/core.min.css' },
       { rel: 'stylesheet', href: 'css/vendor_bundle.min.css' },
-      
+
     ],
     script: [
       { src: '/livewire/livewire.js?id=21fa1dd78491a49255cd', 'data-turbo-eval': 'false', 'data-turbolinks-eval': 'false' },
 
-  
-      { src: '/js/core.min.js' , defer: true },
+
+      { src: '/js/core.min.js', defer: true },
       { src: '/js/app.js', defer: true },
       {
         src: '/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js',
@@ -38,7 +38,18 @@ export default {
         defer: true,
         'data-cfasync': false
       },
-
+      // Google Tag Manager (gtag.js)
+      { src: 'https://www.googletagmanager.com/gtag/js?id=G-SSMQYY2R5Q', async: true },
+      {
+        innerHTML: `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SSMQYY2R5Q');
+    `,
+        type: 'text/javascript',
+        charset: 'utf-8'
+      }
     ],
     bodyAttrs: {
       class: 'header-sticky header-over'
@@ -91,5 +102,5 @@ export default {
       },
     },
   },
-  
+
 }
