@@ -349,7 +349,7 @@ const packs = ref([]);
 
 const fetchNosotros = async () => {
   try {
-    const response = await axios.get('http://localhost:8001/api/v1/nosotros/list');
+    const response = await axios.get('https://guaros-backend-production.up.railway.app/api/v1/nosotros/list');
 
     data.value = response.data.data;
 
@@ -364,7 +364,7 @@ const sliders = ref([]);
 
 const fetchSliders = async () => {
   try {
-    const response = await axios.get('http://localhost:8001/api/v1/slider-inicios/list'); // Ajusta la URL a tu API
+    const response = await axios.get('https://guaros-backend-production.up.railway.app/api/v1/slider-inicios/list'); // Ajusta la URL a tu API
     return response.data.data;
   } catch (error) {
     console.error('Error fetching sliders:', error);
@@ -376,11 +376,11 @@ const fetchSliders = async () => {
 
 const fetchTours = async () => {
   try {
-    const response = await axios.get('http://localhost:8001/api/v1/tours-client/list');
+    const response = await axios.get('https://guaros-backend-production.up.railway.app/api/v1/tours-client/list');
     tours.value = response.data.data.map(tour => ({
       id_tour: tour.id_tour,
       ...tour,
-      imagen_portada: `http://localhost:8001/storage/${tour.imagen_portada}`
+      imagen_portada: `https://guaros-backend-production.up.railway.app/storage/${tour.imagen_portada}`
     }));
   } catch (error) {
     console.error('Error fetching tours:', error);
@@ -398,10 +398,10 @@ onMounted(async () => {
 
 const fetchPacks = async () => {
   try {
-    const response = await axios.get('http://localhost:8001/api/v1/packs-client/list');
+    const response = await axios.get('https://guaros-backend-production.up.railway.app/api/v1/packs-client/list');
     packs.value = response.data.map(pack => ({
       ...pack,
-      img_portada: `http://localhost:8001/storage/${pack.img_portada}`
+      img_portada: `https://guaros-backend-production.up.railway.app/storage/${pack.img_portada}`
     }));
   } catch (error) {
     console.error('Error fetching packs:', error);
@@ -410,7 +410,7 @@ const fetchPacks = async () => {
 
 
 const getImageUrl = (path) => {
-  return `http://localhost:8001/storage/slider_inicios/${path}`; // Ajusta la URL según tu configuración
+  return `https://guaros-backend-production.up.railway.app/storage/slider_inicios/${path}`; // Ajusta la URL según tu configuración
 };
 </script>
 

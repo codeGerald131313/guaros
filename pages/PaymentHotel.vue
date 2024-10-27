@@ -268,7 +268,7 @@ export default {
             console.log("Reserva completa a enviar al backend:", completeReservationDetails);
 
             // Realiza la solicitud POST al backend
-            axios.post('http://localhost:8001/api/v1/hotels-booking-client/create', completeReservationDetails)
+            axios.post('https://guaros-backend-production.up.railway.app/api/v1/hotels-booking-client/create', completeReservationDetails)
                 .then(response => {
                     console.log('Respuesta del backend:', response.data);
                     if (response.data.status === 200) {

@@ -79,7 +79,7 @@
                                                 <div v-for="(image, index) in hotel.images" :key="image.id"
                                                     class="grid-item">
                                                     <div class="image-overlay">
-                                                        <img :src="`http://localhost:8001/storage/${image.image_path}`"
+                                                        <img :src="`https://guaros-backend-production.up.railway.app/storage/${image.image_path}`"
                                                             alt="Imagen del Hotel">
                                                         <div class="overlay-content">
                                                             <h5 class="text-white">Imagen {{ index + 1 }}</h5>
@@ -649,7 +649,7 @@ export default {
             return this.hotel.surroundings.filter(s => s.category === category);
         },
         fetchHotelTypes(hotelId) {
-            axios.get(`http://localhost:8001/api/v1/hotels-client/${hotelId}/rooms`)
+            axios.get(`https://guaros-backend-production.up.railway.app/api/v1/hotels-client/${hotelId}/rooms`)
                 .then(response => {
                     if (response.data.status === 'success') {
                         // Almacenar los tipos de habitaciones en una variable de estado
@@ -682,7 +682,7 @@ export default {
         this.fetchHotelTypes(routeId);
 
         // Hacer la solicitud al backend con axios para obtener los detalles del hotel
-        axios.get(`http://localhost:8001/api/v1/hotels-client/record/${routeId}`)
+        axios.get(`https://guaros-backend-production.up.railway.app/api/v1/hotels-client/record/${routeId}`)
             .then(response => {
                 if (response.data.status === 'success') {
                     // Almacenar los datos del hotel en la variable de estado
@@ -690,7 +690,7 @@ export default {
                     this.organizeServicesIntoColumns();
 
                     // Formatear la URL de la imagen principal
-                    this.hotel.imagen_principal_url = `http://localhost:8001/storage/${this.hotel.imagen_principal}`;
+                    this.hotel.imagen_principal_url = `https://guaros-backend-production.up.railway.app/storage/${this.hotel.imagen_principal}`;
 
                     this.hotel.rules = {
                         entrada: this.cleanRuleText(this.hotel.rules.find(rule => rule.category_id === 1)?.rule_text || ''),

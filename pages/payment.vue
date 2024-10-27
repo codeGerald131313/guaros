@@ -230,9 +230,9 @@ export default {
       // Determinar el endpoint en función del tipo de reserva (booking_type)
       let endpoint;
       if (this.booking_type === 'tour') {
-        endpoint = 'http://localhost:8001/api/v1/booking-client/create';
+        endpoint = 'https://guaros-backend-production.up.railway.app/api/v1/booking-client/create';
       } else if (this.booking_type === 'pack') {
-        endpoint = 'http://localhost:8001/api/v1/booking-client/create-pack';
+        endpoint = 'https://guaros-backend-production.up.railway.app/api/v1/booking-client/create-pack';
       } 
 
       try {

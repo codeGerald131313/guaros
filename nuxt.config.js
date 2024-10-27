@@ -84,7 +84,7 @@ export default {
   ],
   axios: {
     // Configura la base URL si es necesario
-    baseURL: 'http://localhost:8000', // Cambia a la URL de tu API
+    baseURL: 'cc', // Cambia a la URL de tu API
   },
   // Modules
   modules: [

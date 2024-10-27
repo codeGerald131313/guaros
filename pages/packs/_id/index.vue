@@ -38,7 +38,7 @@
                                 <!-- Large image on the left side -->
                                 <div class="col-md-8 d-flex">
                                     <img v-if="pack.tours[0]"
-                                        :src="`http://localhost:8001/storage/${pack.tours[0].imagen_portada}`"
+                                        :src="`https://guaros-backend-production.up.railway.app/storage/${pack.tours[0].imagen_portada}`"
                                         class="img-fluid rounded" alt="Main Image"
                                         style="width: 100%; object-fit: cover; height: 100%;" />
                                 </div>
@@ -47,19 +47,19 @@
                                 <div class="col-md-4 d-flex flex-column justify-content-between">
                                     <div class="mb-3 flex-fill">
                                         <img v-if="pack.tours[1]"
-                                            :src="`http://localhost:8001/storage/${pack.tours[1].imagen_portada}`"
+                                            :src="`https://guaros-backend-production.up.railway.app/storage/${pack.tours[1].imagen_portada}`"
                                             class="img-fluid rounded" alt="Small Image 1"
                                             style="width: 100%; height: 100%; object-fit: cover;" />
                                     </div>
                                     <div class="mb-3 flex-fill">
                                         <img v-if="pack.tours[2]"
-                                            :src="`http://localhost:8001/storage/${pack.tours[2].imagen_portada}`"
+                                            :src="`https://guaros-backend-production.up.railway.app/storage/${pack.tours[2].imagen_portada}`"
                                             class="img-fluid rounded" alt="Small Image 2"
                                             style="width: 100%; height: 100%; object-fit: cover;" />
                                     </div>
                                     <div class="flex-fill">
                                         <img v-if="pack.tours[3]"
-                                            :src="`http://localhost:8001/storage/${pack.tours[3].imagen_portada}`"
+                                            :src="`https://guaros-backend-production.up.railway.app/storage/${pack.tours[3].imagen_portada}`"
                                             class="img-fluid rounded" alt="Small Image 3"
                                             style="width: 100%; height: 100%; object-fit: cover;" />
                                     </div>
@@ -243,7 +243,7 @@
                         <div class="col-md-2 text-center">
                             <!-- avatar -->
                             <span class="w--80 h--80 rounded-circle d-inline-block bg-cover"
-                                :style="{ backgroundImage: `url('http://localhost:8001/storage/${tour.imagen_perfil}')` }">
+                                :style="{ backgroundImage: `url('https://guaros-backend-production.up.railway.app/storage/${tour.imagen_perfil}')` }">
                             </span>
                             <div class="mt-2">
                                 <a href="#">Día {{ index + 1 }}</a>
@@ -268,7 +268,7 @@
                             <div class="clearfix">
                                 <a class="photoswipe" data-photoswipe="gallery-review-id-1" :href="tour.imagen_portada">
                                     <img class="float-start mb-1 rounded lazy"
-                                        :src="`http://localhost:8001/storage/` + tour.imagen_portada" :alt="tour.nombre"
+                                        :src="`https://guaros-backend-production.up.railway.app/storage/` + tour.imagen_portada" :alt="tour.nombre"
                                         style="width: 140px; height: 100px; object-fit: cover;" />
                                 </a>
                             </div>
@@ -355,7 +355,7 @@ export default {
             return this.pack.precio - this.pack.precio * 0.9; // Ejemplo de ahorro del 10%
         },
         imagePortadaUrl() {
-            return `http://localhost:8001/storage/` + this.pack.img_portada;
+            return `https://guaros-backend-production.up.railway.app/storage/` + this.pack.img_portada;
         }
     },
     async mounted() {
@@ -366,7 +366,7 @@ export default {
         async fetchPack() {
             try {
                 const packId = this.$route.params.id;
-                const response = await axios.get(`http://localhost:8001/api/v1/packs-client/pack/${packId}`);
+                const response = await axios.get(`https://guaros-backend-production.up.railway.app/api/v1/packs-client/pack/${packId}`);
                 this.pack = response.data;
             } catch (error) {
                 console.error('Error fetching pack data:', error);

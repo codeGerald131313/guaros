@@ -179,12 +179,12 @@ export default {
     // Función para obtener los tours
     const fetchTours = async () => {
       try {
-        const response = await axios.get('http://localhost:8001/api/v1/tours-client/list');
+        const response = await axios.get('https://guaros-backend-production.up.railway.app/api/v1/tours-client/list');
         tours.value = response.data.data.map(tour => ({
           ...tour,
           id_tour: tour.id_tour,
           price_agencia: parseFloat(tour.price_agencia), // Asegurarse de que el precio sea un número
-          imagen_portada: `http://localhost:8001/storage/${tour.imagen_portada}`,
+          imagen_portada: `https://guaros-backend-production.up.railway.app/storage/${tour.imagen_portada}`,
         }));
 
         // Contar los tours por rango de precio

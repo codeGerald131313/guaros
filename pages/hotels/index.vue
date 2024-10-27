@@ -348,7 +348,7 @@ export default {
     },
     async mounted() {
         try {
-            const response = await axios.get('http://localhost:8001/api/v1/hotels-client/list'); // Cambia la URL a la de tu API
+            const response = await axios.get('https://guaros-backend-production.up.railway.app/api/v1/hotels-client/list'); // Cambia la URL a la de tu API
             console.log('Hotels fetched:', response);
             this.hotels = response.data.data;
         } catch (error) {

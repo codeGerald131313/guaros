@@ -52,24 +52,24 @@
               <div class="row d-flex align-items-stretch">
                 <!-- Large image on the left side -->
                 <div class="col-md-8 d-flex">
-                  <img v-if="sliderTours[0]" :src="`http://localhost:8001/storage/${sliderTours[0].imagen}`"
+                  <img v-if="sliderTours[0]" :src="`https://guaros-backend-production.up.railway.app/storage/${sliderTours[0].imagen}`"
                     class="img-fluid rounded" alt="Main Image" style="width: 100%; object-fit: cover; height: 100%;">
                 </div>
 
                 <!-- Smaller images on the right side -->
                 <div class="col-md-4 d-flex flex-column justify-content-between">
                   <div class="mb-3 flex-fill">
-                    <img v-if="sliderTours[1]" :src="`http://localhost:8001/storage/${sliderTours[1].imagen}`"
+                    <img v-if="sliderTours[1]" :src="`https://guaros-backend-production.up.railway.app/storage/${sliderTours[1].imagen}`"
                       class="img-fluid rounded" alt="Small Image 1"
                       style="width: 100%; height: 100%; object-fit: cover;">
                   </div>
                   <div class="mb-3 flex-fill">
-                    <img v-if="sliderTours[2]" :src="`http://localhost:8001/storage/${sliderTours[2].imagen}`"
+                    <img v-if="sliderTours[2]" :src="`https://guaros-backend-production.up.railway.app/storage/${sliderTours[2].imagen}`"
                       class="img-fluid rounded" alt="Small Image 2"
                       style="width: 100%; height: 100%; object-fit: cover;">
                   </div>
                   <div class="flex-fill">
-                    <img v-if="sliderTours[3]" :src="`http://localhost:8001/storage/${sliderTours[3].imagen}`"
+                    <img v-if="sliderTours[3]" :src="`https://guaros-backend-production.up.railway.app/storage/${sliderTours[3].imagen}`"
                       class="img-fluid rounded" alt="Small Image 3"
                       style="width: 100%; height: 100%; object-fit: cover;">
                   </div>
@@ -426,11 +426,11 @@ export default {
     },
     async fetchTours() {
       try {
-        const response = await axios.get('http://localhost:8001/api/v1/tours-client/list');
+        const response = await axios.get('https://guaros-backend-production.up.railway.app/api/v1/tours-client/list');
         this.tours = response.data.data.map(tour => ({
           ...tour,
           id_tour: tour.id_tour,
-          imagen_portada: `http://localhost:8001/storage/${tour.imagen_portada}`
+          imagen_portada: `https://guaros-backend-production.up.railway.app/storage/${tour.imagen_portada}`
         }));
 
         console.log(this.tour);
@@ -476,7 +476,7 @@ export default {
     async fetchTour() {
       try {
         const tourId = this.$route.params.id;
-        const response = await axios.get(`http://localhost:8001/api/v1/tours-client/tour/${tourId}`);
+        const response = await axios.get(`https://guaros-backend-production.up.railway.app/api/v1/tours-client/tour/${tourId}`);
         const data = response.data.tour;
         this.tourName = data.nombre;
         this.tourHistory = data.historia;
@@ -489,7 +489,7 @@ export default {
         this.tourEtiquetaAl = data.etiqueta_al;
         // this.tourLocation = data.location;
         this.linkVideo = data.link_video; // Asegúrate de que `data.video_link` contenga el enlace al video
-        this.imagePortadaUrl = `http://localhost:8001/storage/${data.imagen_portada}`;
+        this.imagePortadaUrl = `https://guaros-backend-production.up.railway.app/storage/${data.imagen_portada}`;
 
         this.sliderTours = data.slider_tours; // Asigna los datos de los slider tours
         this.tour_characteristics = data.tour_characteristics;

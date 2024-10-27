@@ -137,12 +137,12 @@ export default {
         // Función para obtener los paquetes
         const fetchPacks = async () => {
             try {
-                const response = await axios.get('http://localhost:8001/api/v1/packs-client/list');
+                const response = await axios.get('https://guaros-backend-production.up.railway.app/api/v1/packs-client/list');
                 packs.value = response.data.map(pack => ({
                     id_pack: pack.id_pack,
                     ...pack,
                     precio: parseFloat(pack.precio), // Asegurarse de que el precio sea un número
-                    img_portada: `http://localhost:8001/storage/${pack.img_portada}`
+                    img_portada: `https://guaros-backend-production.up.railway.app/storage/${pack.img_portada}`
                 }));
 
                 // Contar los packs por rango de precio
