@@ -178,21 +178,29 @@ export default {
 
     // Función para obtener los tours
     const fetchTours = async () => {
-      try {
-        const response = await axios.get('https://guaros-backend-production.up.railway.app/api/v1/tours-client/list');
-        tours.value = response.data.data.map(tour => ({
-          ...tour,
-          id_tour: tour.id_tour,
-          price_agencia: parseFloat(tour.price_agencia), // Asegurarse de que el precio sea un número
-          imagen_portada: `https://guaros-backend-production.up.railway.app/storage/${tour.imagen_portada}`,
-        }));
-
-        // Contar los tours por rango de precio
-        calculatePriceRangeCounts();
-      } catch (error) {
-        console.error('Error fetching tours:', error);
+  try {
+    const response = await axios.get('https://guaros-backend-production.up.railway.app/api/v1/tours-client/list', {
+      headers: {
+        'Access-Control-Allow-Origin': '*', // Permitir acceso desde cualquier origen (CORS)
+        // Si tienes autenticación:
+        // 'Authorization': `Bearer ${token}`, // Si usas autenticación con token
       }
-    };
+    });
+
+    tours.value = response.data.data.map(tour => ({
+      ...tour,
+      id_tour: tour.id_tour,
+      price_agencia: parseFloat(tour.price_agencia), // Asegurarse de que el precio sea un número
+      imagen_portada: `https://guaros-backend-production.up.railway.app/storage/${tour.imagen_portada}`,
+    }));
+
+    // Contar los tours por rango de precio
+    calculatePriceRangeCounts();
+  } catch (error) {
+    console.error('Error fetching tours:', error);
+  }
+};
+
 
     // Función para contar cuántos tours caen dentro de cada rango de precios
     const calculatePriceRangeCounts = () => {
