@@ -1,14 +1,14 @@
 export default {
   // Global page headers
   head: {
-    title: 'Guaros Tours | Agencia de turismo, viajes aéreos y servicio hotelero en Tarapoto',
+    title: 'Guaros Tours | Agencia de turismo, viajes aéreos y servicio hotelero en taraporo',
     htmlAttrs: {
       lang: 'es'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Agencia de turismo, Agencia de viajes aéreos y Agencia de servicio hotelero en Tarapoto' },
+      { hid: 'description', name: 'description', content: 'Agencia de turismo, Agencia de viajes aéreos y Agencia de servicio hotelero en Taraporo' },
       { name: 'theme-color', content: '#377dff' },
       { name: 'csrf-token', content: '3GFNeJRC0B6aG6L467jjGE3jRpSFs7AS0hQA5V0h' }
     ],
@@ -23,10 +23,13 @@ export default {
       { rel: 'preconnect', href: 'https://fonts.googleapis.com/' },
       { rel: 'preconnect', href: 'https://fonts.gstatic.com/' },
       { rel: 'stylesheet', href: 'css/core.min.css' },
-      { rel: 'stylesheet', href: 'css/vendor_bundle.min.css' }
+      { rel: 'stylesheet', href: 'css/vendor_bundle.min.css' },
+
     ],
     script: [
       { src: '/livewire/livewire.js?id=21fa1dd78491a49255cd', 'data-turbo-eval': 'false', 'data-turbolinks-eval': 'false' },
+
+
       { src: '/js/core.min.js', defer: true },
       { src: '/js/app.js', defer: true },
       {
@@ -35,25 +38,24 @@ export default {
         defer: true,
         'data-cfasync': false
       },
-      // Google Analytics
+      // Google Tag Manager (gtag.js)
       { src: 'https://www.googletagmanager.com/gtag/js?id=G-SSMQYY2R5Q', async: true },
       {
         innerHTML: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-SSMQYY2R5Q');
-        `,
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SSMQYY2R5Q');
+    `,
         type: 'text/javascript',
         charset: 'utf-8'
-      },
-      
+      }
     ],
     bodyAttrs: {
       class: 'header-sticky header-over'
     },
     __dangerouslyDisableSanitizersByTagID: {
-      'google-analytics': ['innerHTML'],
+      'livewire-init': ['innerHTML']
     }
   },
   bridge: true,
@@ -64,8 +66,9 @@ export default {
     '@/assets/css/vendor.daterangepicker.min.css',
     '@/assets/css/leaflet.css',
     '@/assets/css/vendor.swiper.min.css',
-    '@/assets/css/vendor_bundle.min.css'
+    '@/assets/css/vendor_bundle.min.css',
   ],
+
 
   // Plugins to run before rendering page
   plugins: [
@@ -79,15 +82,13 @@ export default {
   buildModules: [
     // Añade módulos de build si es necesario
   ],
-
   axios: {
     // Configura la base URL si es necesario
-    baseURL: 'cc'  // Cambia a la URL de tu API
+    baseURL: 'cc', // Cambia a la URL de tu API
   },
-
   // Modules
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
   ],
 
   build: {
@@ -96,9 +97,10 @@ export default {
     postcss: {
       plugins: {
         'postcss-import': {},
-        'postcss-url': {}
+        'postcss-url': {},
         // Otros plugins postcss si es necesario
-      }
-    }
-  }
+      },
+    },
+  },
+
 }
