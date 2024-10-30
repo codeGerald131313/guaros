@@ -9,7 +9,7 @@
             <section class="container tabs-section">
                 <div class="left-column">
                     <h2 class="title">{{ tourName }}</h2>
-                    <form class="form-grid">
+                    <form class="form-grid" id="form_reservations_dime1">
                         <!-- Datos del cliente -->
                         <div class="form-group-row">
                             <!-- Campo Nombre -->
