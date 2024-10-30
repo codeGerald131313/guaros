@@ -27,8 +27,9 @@ export default {
     Footer,
   },
   mounted() {
-
-     document.body.classList.add('header-sticky', 'header-over');
+    // Agrega la clase al body cuando el componente está montado
+    document.body.classList.add('header-sticky', 'header-over');
+    
     // Inyecta el Google Tag Manager en el <head>
     const script = document.createElement('script');
     script.type = 'text/javascript';
@@ -41,12 +42,13 @@ export default {
       })(window,document,'script','dataLayer','GTM-N8K2TJG6');
     `;
     document.head.appendChild(script);
+  },
+  beforeDestroy() {
+    // Elimina la clase del body cuando el componente se destruye
+    document.body.classList.remove('header-sticky', 'header-over');
   }
-     beforeDestroy() {
-      // Elimina la clase del body cuando el componente se destruye
-      document.body.classList.remove('header-sticky', 'header-over');
-    }
 }
+
 </script>
 
 
