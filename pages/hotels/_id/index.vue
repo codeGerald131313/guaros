@@ -240,7 +240,7 @@
                                                 <td>
                                                     <!-- Solo mostrar el botón y resumen de selección en la primera fila -->
                                                     <div v-if="index === 0">
-                                                        <button class="btn btn-primary btn-block"
+                                                        <button class="btn btn-primary btn-block" id="sendReservationHotel" 
                                                             @click="reserveAllRooms">Reservar</button>
                                                         <div v-if="selectedRooms.length > 0" class="mt-3">
                                                             <p><strong>Habitaciones seleccionadas:</strong></p>
