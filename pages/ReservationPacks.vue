@@ -9,7 +9,7 @@
             <section class="container tabs-section">
                 <div class="left-column">
                     <h2 class="title">{{ packName }}</h2>
-                <form @submit.prevent="goToReservation" class="form-grid" id="form_reservations_dime2">
+                <form @submit.prevent="goToReservation" class="form-grid" id="form_reservations_packs">
     <!-- Datos del cliente -->
     <div class="form-group-row">
         <!-- Campo Nombre -->
