@@ -166,7 +166,7 @@
 
                   <p class="font-weight-bold mt-3">Total: <span style="color: #b00;">S/. {{ totalPrice }}</span></p>
                   <!-- Usamos un evento @click en lugar de :to -->
-                  <button @click="goToReservation" class="btn btn-danger btn-block"
+                  <button @click="goToReservation" id="sendReservation" class="btn btn-danger btn-block"
                     style="background-color: #b00; border-color: #b00;">
                     Reservar
                   </button>
