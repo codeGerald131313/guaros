@@ -20,56 +20,53 @@
                     </div>
                 </div>
 
-                <!-- Contenedor principal con dos columnas -->
-                <div class="reserva-body">
-                    <!-- Columna izquierda: Los datos de la reserva + Desglose del precio -->
-                    <div class="columna-izquierda">
-                        <div class="reserva-info">
-                            <h3>Los datos de tu reserva</h3>
-                            <div class="reserva-dates">
-                                <p><strong>Entrada:</strong> {{ checkInDate }} - {{ checkInTime }}</p>
-                                <p><strong>Salida:</strong> {{ checkOutDate }} - {{ checkOutTime }}</p>
-                                <p><strong>Duración total de la estancia:</strong> {{ totalNights }} noches</p>
-                                <p><strong>Has seleccionado:</strong> {{ selectedRoomInfo }}</p>
+                <!-- Contenedor principal con dos columnas dentro del formulario -->
+                <form @submit.prevent="submitForm" id="form_reserva_hotel">
+                    <div class="reserva-body">
+                        <!-- Columna izquierda: Los datos de la reserva + Desglose del precio -->
+                        <div class="columna-izquierda">
+                            <div class="reserva-info">
+                                <h3>Los datos de tu reserva</h3>
+                                <div class="reserva-dates">
+                                    <p><strong>Entrada:</strong> {{ checkInDate }} - {{ checkInTime }}</p>
+                                    <p><strong>Salida:</strong> {{ checkOutDate }} - {{ checkOutTime }}</p>
+                                    <p><strong>Duración total de la estancia:</strong> {{ totalNights }} noches</p>
+                                    <p><strong>Has seleccionado:</strong> {{ selectedRoomInfo }}</p>
+                                </div>
+                                <button type="button" class="btn-change">Cambia tu selección</button>
                             </div>
-                            <button class="btn-change">Cambia tu selección</button>
+
+                            <div class="desglose-precio">
+                                <h3>Desglose del precio</h3>
+                                <div class="precio-detalles">
+                                    <p><strong>Precio original</strong> <span>S/ {{ originalPrice.toFixed(2) }}</span></p>
+                                    <p><strong>Oferta Escapada</strong> <span>- S/ {{ discount.toFixed(2) }}</span></p>
+                                    <p class="nota">Este alojamiento ofrece un descuento para estancias seleccionadas.</p>
+                                </div>
+
+                                <div class="precio-final">
+                                    <p class="tachado">S/ {{ originalPrice.toFixed(0) }}</p>
+                                    <h2>Precio <span>S/ {{ finalPrice.toFixed(2) }}</span></h2>
+                                    <p>Se pueden aplicar otros cargos</p>
+                                    <p>En la moneda del alojamiento: US$ {{ usdPrice.toFixed(2) }}</p>
+                                </div>
+
+                                <div class="info-precio">
+                                    <h3>Información sobre el precio</h3>
+                                    <ul>
+                                        <li><strong>Convertimos el precio</strong> para que veas el coste aproximado en S/.
+                                            Pagarás en US$ o en PEN.</li>
+                                        <li>Ten en cuenta que tu tarjeta puede aplicar cargos por transacción internacional.</li>
+                                        <li>Los ciudadanos de Perú deben abonar un 18% de IVA. Este impuesto no está incluido en el precio final.</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="desglose-precio">
-                            <h3>Desglose del precio</h3>
-                            <div class="precio-detalles">
-                                <p><strong>Precio original</strong> <span>S/ {{ originalPrice.toFixed(2) }}</span></p>
-                                <p><strong>Oferta Escapada</strong> <span>- S/ {{ discount.toFixed(2) }}</span></p>
-                                <p class="nota">Este alojamiento ofrece un descuento para estancias seleccionadas.</p>
-                            </div>
-
-                            <div class="precio-final">
-                                <p class="tachado">S/ {{ originalPrice.toFixed(0) }}</p>
-                                <h2>Precio <span>S/ {{ finalPrice.toFixed(2) }}</span></h2>
-                                <p>Se pueden aplicar otros cargos</p>
-                                <p>En la moneda del alojamiento: US$ {{ usdPrice.toFixed(2) }}</p>
-                            </div>
-
-                            <div class="info-precio">
-                                <h3>Información sobre el precio</h3>
-                                <ul>
-                                    <li><strong>Convertimos el precio</strong> para que veas el coste aproximado en S/.
-                                        Pagarás en US$ o en PEN.</li>
-                                    <li>Ten en cuenta que tu tarjeta puede aplicar cargos por transacción internacional.
-                                    </li>
-                                    <li>Los ciudadanos de Perú deben abonar un 18% de IVA. Este impuesto no está
-                                        incluido en el precio final.</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Columna derecha: Introduce tus datos -->
-                    <div class="columna-derecha">
-                        <div class="reserva-form">
-                            <h3>Introduce tus datos</h3>
-                            <form @submit.prevent="submitForm">
+                        <!-- Columna derecha: Introduce tus datos -->
+                        <div class="columna-derecha">
+                            <div class="reserva-form">
+                                <h3>Introduce tus datos</h3>
                                 <div class="form-group">
                                     <label for="nombre">Nombre *</label>
                                     <input type="text" id="nombre" v-model="nombre" required />
@@ -86,117 +83,87 @@
                                     <label for="direccion">Dirección</label>
                                     <input type="text" id="direccion" v-model="direccion" />
                                 </div>
-                                <button type="submit" class="btn-submit">Continuar</button>
-                            </form>
-                        </div>
+                            </div>
 
-                        <!-- Información útil -->
-                        <div class="informacion-util">
-                            <h3>Información útil</h3>
-                            <p><i class="fas fa-credit-card"></i> No se necesita tarjeta de crédito</p>
-                        </div>
+                            <!-- Información útil -->
+                            <div class="informacion-util">
+                                <h3>Información útil</h3>
+                                <p><i class="fas fa-credit-card"></i> No se necesita tarjeta de crédito</p>
+                            </div>
 
-                        <!-- Información de la habitación -->
-                        <div class="habitacion-info" v-if="reservationDetails">
-                            <!-- Recorre las habitaciones seleccionadas -->
-                            <div v-for="(room, index) in reservationDetails.selectedRooms" :key="index">
-                                <h3>{{ room.typebedroom_description }}</h3>
-                                <p><i class="icono-desayuno"></i> Desayuno incluido en el precio</p>
-                                <p>9.2 Fantástico - 3 comentarios</p>
-                                <p><i class="icono-cancelacion"></i> Cancelación gratis antes del 22 de septiembre de
-                                    2024</p>
-                                <p><i class="icono-pago"></i> Sin pago por adelantado - Pagarás en el alojamiento</p>
-                                <p><strong>Personas:</strong> {{ reservationDetails.guests.adults }} adulto(s), {{
-                                    reservationDetails.guests.children }} niño(s)</p>
-                                <p><i class="icono-no-fumar"></i> No se puede fumar</p>
+                            <!-- Información de la habitación -->
+                            <div class="habitacion-info" v-if="reservationDetails">
+                                <div v-for="(room, index) in reservationDetails.selectedRooms" :key="index">
+                                    <h3>{{ room.typebedroom_description }}</h3>
+                                    <p><i class="icono-desayuno"></i> Desayuno incluido en el precio</p>
+                                    <p>9.2 Fantástico - 3 comentarios</p>
+                                    <p><i class="icono-cancelacion"></i> Cancelación gratis antes del 22 de septiembre de 2024</p>
+                                    <p><i class="icono-pago"></i> Sin pago por adelantado - Pagarás en el alojamiento</p>
+                                    <p><strong>Personas:</strong> {{ reservationDetails.guests.adults }} adulto(s), {{ reservationDetails.guests.children }} niño(s)</p>
+                                    <p><i class="icono-no-fumar"></i> No se puede fumar</p>
+                                </div>
+                                <p><strong>Total a pagar:</strong> S/. {{ finalPrice.toFixed(2) }}</p>
+                            </div>
+                            <div v-else>
+                                <p>No se encontraron detalles de la reserva.</p>
+                            </div>
 
-                                <div class="caracteristicas-habitacion">
-                                    <span>35 m²</span>
-                                    <span>Vistas a la montaña</span>
-                                    <span>Vistas a la ciudad</span>
-                                    <span>Piscina en la azotea</span>
-                                    <span>Aire acondicionado</span>
-                                    <span>Baño en la habitación</span>
-                                    <span>TV de pantalla plana</span>
+                            <!-- Opciones para añadir a tu reserva -->
+                            <div class="opciones-reserva">
+                                <h3>Opciones para añadir a tu reserva</h3>
+                                <div class="form-group">
+                                    <input type="checkbox" id="traslado" v-model="traslado" />
+                                    <label for="traslado"><i class="fas fa-plane"></i> Quiero solicitar el servicio de traslado desde el aeropuerto</label>
+                                    <p>Le diremos al alojamiento que te interesa este servicio para que puedan enviarte más información además de los precios.</p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" id="alquilar-coche" v-model="alquilarCoche" />
+                                    <label for="alquilar-coche"><i class="fas fa-car"></i> Quiero alquilar un coche</label>
+                                    <p>¡Aprovecha al máximo tu viaje! Consulta las opciones de alquiler de coches en la confirmación de la reserva.</p>
                                 </div>
                             </div>
 
-                            <!-- Total a pagar -->
-                            <p><strong>Total a pagar:</strong> S/. {{ finalPrice.toFixed(2) }}</p>
-                        </div>
-                        <div v-else>
-                            <p>No se encontraron detalles de la reserva.</p>
-                        </div>
-
-                        <!-- Opciones para añadir a tu reserva -->
-                        <div class="opciones-reserva">
-                            <h3>Opciones para añadir a tu reserva</h3>
-                            <div class="form-group">
-                                <input type="checkbox" id="traslado" v-model="traslado" />
-                                <label for="traslado"><i class="fas fa-plane"></i> Quiero solicitar el servicio de
-                                    traslado desde el aeropuerto</label>
-                                <p>Le diremos al alojamiento que te interesa este servicio para que puedan enviarte más
-                                    información además de los precios.</p>
+                            <!-- Peticiones especiales -->
+                            <div class="peticiones-especiales">
+                                <h3>Peticiones especiales</h3>
+                                <div class="form-group">
+                                    <label for="peticiones">Escribe tus peticiones en inglés o en español. (opcional)</label>
+                                    <textarea id="peticiones" v-model="peticiones" rows="4"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" id="habitaciones-cerca" v-model="habitacionesCerca" />
+                                    <label for="habitaciones-cerca">Me gustaría que mis habitaciones estuviesen cerca (si es posible)</label>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="checkbox" id="alquilar-coche" v-model="alquilarCoche" />
-                                <label for="alquilar-coche"><i class="fas fa-car"></i> Quiero alquilar un coche</label>
-                                <p>¡Aprovecha al máximo tu viaje! Consulta las opciones de alquiler de coches en la
-                                    confirmación de la reserva.</p>
-                            </div>
-                        </div>
 
-                        <!-- Peticiones especiales -->
-                        <div class="peticiones-especiales">
-                            <h3>Peticiones especiales</h3>
-                            <p>Las peticiones especiales no se pueden garantizar, pero el alojamiento hará todo lo
-                                posible por satisfacerlas. También puedes enviarnos tu petición especial cuando hayas
-                                realizado la reserva.</p>
-                            <div class="form-group">
-                                <label for="peticiones">Escribe tus peticiones en inglés o en español.
-                                    (opcional)</label>
-                                <textarea id="peticiones" v-model="peticiones" rows="4"></textarea>
+                            <!-- Tu hora de llegada -->
+                            <div class="hora-llegada">
+                                <h3>Tu hora de llegada</h3>
+                                <div class="form-group">
+                                    <label for="hora-llegada">Añade tu hora de llegada aproximada (opcional)</label>
+                                    <select id="hora-llegada" v-model="horaLlegada">
+                                        <option value="">Indica una hora</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="17:00">17:00</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="checkbox" id="habitaciones-cerca" v-model="habitacionesCerca" />
-                                <label for="habitaciones-cerca">Me gustaría que mis habitaciones estuviesen cerca (si es
-                                    posible)</label>
+
+                            <!-- Botón de envío -->
+                            <div class="btn-container">
+                                <button type="submit" class="btn-siguiente" style="background-color: #b00; border-color: #b00;">
+                                    Reservar
+                                </button>
                             </div>
-                        </div>
-
-                        <!-- Tu hora de llegada -->
-                        <div class="hora-llegada">
-                            <h3>Tu hora de llegada</h3>
-                            <p><i class="fas fa-check-circle"></i> Tus habitaciones estarán listas para el check-in
-                                entre las 15:00 y las 00:00</p>
-                            <p><i class="fas fa-concierge-bell"></i> Recepción 24 horas – ¡Tendrás ayuda siempre que la
-                                necesites!</p>
-                            <div class="form-group">
-                                <label for="hora-llegada">Añade tu hora de llegada aproximada (opcional)</label>
-                                <select id="hora-llegada" v-model="horaLlegada">
-                                    <option value="">Indica una hora</option>
-                                    <option value="15:00">15:00</option>
-                                    <option value="16:00">16:00</option>
-                                    <option value="17:00">17:00</option>
-                                    <!-- Agrega más opciones de hora aquí -->
-                                </select>
-                                <p>Hora de la zona horaria de Tarapoto</p>
-                            </div>
-                        </div>
-
-                        <div class="btn-container">
-                            <button @click.prevent="submitForm" class="btn-siguiente"
-                                style="background-color: #b00; border-color: #b00;">
-                                Reservar
-                            </button>
-
                         </div>
                     </div>
-                </div>
+                </form>
             </section>
         </div>
     </main>
 </template>
+
 
 <script>
 export default {
