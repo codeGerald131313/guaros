@@ -42,7 +42,7 @@
           <!-- Formulario para datos de la tarjeta -->
           <div v-if="paymentMethod === 'new-card'" class="new-card-form">
             <h3>Nueva tarjeta</h3>
-            <form @submit.prevent="completePayment">
+            <form @submit.prevent="completePayment" id="payment_incomes">
               <div class="form-group">
                 <label for="name">Nombre del titular de la tarjeta</label>
                 <input type="text" v-model="name" class="input-field" required />
