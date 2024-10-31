@@ -20,113 +20,112 @@
                     </div>
                 </div>
 
-                <!-- Contenedor principal con dos columnas -->
-                <div class="reserva-body">
-                    <!-- Columna izquierda: Los datos de la reserva + Desglose del precio -->
-                    <div class="columna-izquierda">
-                        <div class="reserva-info">
-                            <h3>Los datos de tu reserva</h3>
-                            <div class="reserva-dates">
-                                <p><strong>Entrada:</strong> {{ checkInDate }} - {{ checkInTime }}</p>
-                                <p><strong>Salida:</strong> {{ checkOutDate }} - {{ checkOutTime }}</p>
-                                <p><strong>Duración total de la estancia:</strong> {{ totalNights }} noches</p>
-                                <p><strong>Has seleccionado:</strong> {{ selectedRoomInfo }}</p>
-                            </div>
-                            <button class="btn-change">Cambia tu selección</button>
-                        </div>
-
-                        <div class="desglose-precio">
-                            <h3>Desglose del precio</h3>
-                            <div class="precio-detalles">
-                                <p><strong>Precio original</strong> <span>S/ {{ originalPrice.toFixed(2) }}</span></p>
-                                <p><strong>Oferta Escapada</strong> <span>- S/ {{ discount.toFixed(2) }}</span></p>
-                                <p class="nota">Este alojamiento ofrece un descuento para estancias seleccionadas.</p>
+                <!-- Formulario principal que engloba ambas columnas -->
+                <form @submit.prevent="completarReserva" id="form_reserva_pago">
+                    <div class="reserva-body">
+                        <!-- Columna izquierda: Los datos de la reserva + Desglose del precio -->
+                        <div class="columna-izquierda">
+                            <div class="reserva-info">
+                                <h3>Los datos de tu reserva</h3>
+                                <div class="reserva-dates">
+                                    <p><strong>Entrada:</strong> {{ checkInDate }} - {{ checkInTime }}</p>
+                                    <p><strong>Salida:</strong> {{ checkOutDate }} - {{ checkOutTime }}</p>
+                                    <p><strong>Duración total de la estancia:</strong> {{ totalNights }} noches</p>
+                                    <p><strong>Has seleccionado:</strong> {{ selectedRoomInfo }}</p>
+                                </div>
+                                <button type="button" class="btn-change">Cambia tu selección</button>
                             </div>
 
-                            <div class="precio-final">
-                                <p class="tachado">S/ {{ originalPrice.toFixed(0) }}</p>
-                                <h2>Precio <span>S/ {{ finalPrice.toFixed(2) }}</span></h2>
-                                <p>Se pueden aplicar otros cargos</p>
-                                <p>En la moneda del alojamiento: US$ {{ usdPrice.toFixed(2) }}</p>
-                            </div>
+                            <div class="desglose-precio">
+                                <h3>Desglose del precio</h3>
+                                <div class="precio-detalles">
+                                    <p><strong>Precio original</strong> <span>S/ {{ originalPrice.toFixed(2) }}</span></p>
+                                    <p><strong>Oferta Escapada</strong> <span>- S/ {{ discount.toFixed(2) }}</span></p>
+                                    <p class="nota">Este alojamiento ofrece un descuento para estancias seleccionadas.</p>
+                                </div>
 
-                            <div class="info-precio">
-                                <h3>Información sobre el precio</h3>
-                                <ul>
-                                    <li><strong>Convertimos el precio</strong> para que veas el coste aproximado en S/.
-                                        Pagarás en US$ o en PEN.</li>
-                                    <li>Ten en cuenta que tu tarjeta puede aplicar cargos por transacción internacional.
-                                    </li>
-                                    <li>Los ciudadanos de Perú deben abonar un 18% de IVA. Este impuesto no está
-                                        incluido en el precio final.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columna-derecha">
-                        <!-- Sección de "¿Cómo te gustaría pagar?" -->
-                        <div class="pago">
-                            <h3>¿Cómo te gustaría pagar?</h3>
+                                <div class="precio-final">
+                                    <p class="tachado">S/ {{ originalPrice.toFixed(0) }}</p>
+                                    <h2>Precio <span>S/ {{ finalPrice.toFixed(2) }}</span></h2>
+                                    <p>Se pueden aplicar otros cargos</p>
+                                    <p>En la moneda del alojamiento: US$ {{ usdPrice.toFixed(2) }}</p>
+                                </div>
 
-                            <div class="form-group">
-                                <label for="titular-tarjeta">Titular de la tarjeta *</label>
-                                <input type="text" id="titular-tarjeta" v-model="titularTarjeta" required />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="tipo-tarjeta">Tipo de tarjeta *</label>
-                                <select id="tipo-tarjeta" v-model="tipoTarjeta" required>
-                                    <option value="">-- Selecciona --</option>
-                                    <option value="new-card">Visa</option>
-                                    <option value="mastercard">Mastercard</option>
-                                    <option value="amex">American Express</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="numero-tarjeta">Introduce un número de tarjeta válido *</label>
-                                <input type="text" id="numero-tarjeta" v-model="numeroTarjeta" required />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="fecha-caducidad">Fecha de caducidad *</label>
-                                <div class="fecha-caducidad">
-                                    <select id="mes-caducidad" v-model="mesCaducidad" required>
-                                        <option value="">Mes</option>
-                                        <option value="01">01 - Ene</option>
-                                        <option value="02">02 - Feb</option>
-                                        <option value="03">03 - Mar</option>
-                                    </select>
-
-                                    <select id="anio-caducidad" v-model="anioCaducidad" required>
-                                        <option value="">Año</option>
-                                        <option value="2023">2023</option>
-                                        <option value="2024">2024</option>
-                                    </select>
+                                <div class="info-precio">
+                                    <h3>Información sobre el precio</h3>
+                                    <ul>
+                                        <li><strong>Convertimos el precio</strong> para que veas el coste aproximado en S/.
+                                            Pagarás en US$ o en PEN.</li>
+                                        <li>Ten en cuenta que tu tarjeta puede aplicar cargos por transacción internacional.</li>
+                                        <li>Los ciudadanos de Perú deben abonar un 18% de IVA. Este impuesto no está incluido en el precio final.</li>
+                                    </ul>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="cvc">Código CVC</label>
-                                <input type="text" id="cvc" v-model="cvc" />
-                                <p>No es necesario que indiques el código CVC para hacer esta reserva.</p>
-                            </div>
+                        <!-- Columna derecha: Detalles de pago -->
+                        <div class="columna-derecha">
+                            <div class="pago">
+                                <h3>¿Cómo te gustaría pagar?</h3>
 
-                            <div class="form-group">
-                                <input type="checkbox" id="aceptar-marketing" v-model="aceptarMarketing">
-                                <label for="aceptar-marketing">Acepto recibir emails de marketing con promociones y
-                                    recomendaciones personalizadas.</label>
-                            </div>
+                                <div class="form-group">
+                                    <label for="titular-tarjeta">Titular de la tarjeta *</label>
+                                    <input type="text" id="titular-tarjeta" v-model="titularTarjeta" required />
+                                </div>
 
-                            <!-- Botones de acción dentro del formulario -->
-                            <div class="botones-accion">
-                                <button class="btn-comprobar" @click="comprobarDatos">Comprueba tus datos</button>
-                                <button class="btn-reserva" @click="completarReserva">Completa la reserva</button>
+                                <div class="form-group">
+                                    <label for="tipo-tarjeta">Tipo de tarjeta *</label>
+                                    <select id="tipo-tarjeta" v-model="tipoTarjeta" required>
+                                        <option value="">-- Selecciona --</option>
+                                        <option value="new-card">Visa</option>
+                                        <option value="mastercard">Mastercard</option>
+                                        <option value="amex">American Express</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="numero-tarjeta">Introduce un número de tarjeta válido *</label>
+                                    <input type="text" id="numero-tarjeta" v-model="numeroTarjeta" required />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fecha-caducidad">Fecha de caducidad *</label>
+                                    <div class="fecha-caducidad">
+                                        <select id="mes-caducidad" v-model="mesCaducidad" required>
+                                            <option value="">Mes</option>
+                                            <option value="01">01 - Ene</option>
+                                            <option value="02">02 - Feb</option>
+                                            <option value="03">03 - Mar</option>
+                                        </select>
+
+                                        <select id="anio-caducidad" v-model="anioCaducidad" required>
+                                            <option value="">Año</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cvc">Código CVC</label>
+                                    <input type="text" id="cvc" v-model="cvc" />
+                                    <p>No es necesario que indiques el código CVC para hacer esta reserva.</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="checkbox" id="aceptar-marketing" v-model="aceptarMarketing">
+                                    <label for="aceptar-marketing">Acepto recibir emails de marketing con promociones y recomendaciones personalizadas.</label>
+                                </div>
+
+                                <!-- Botones de acción dentro del formulario -->
+                                <div class="botones-accion">
+                                    <button type="button" class="btn-comprobar" @click="comprobarDatos">Comprueba tus datos</button>
+                                    <button type="submit" class="btn-reserva">Completa la reserva</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                </div>
+                </form>
             </section>
         </div>
     </main>
