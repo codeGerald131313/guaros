@@ -167,7 +167,7 @@
                                 <p class="font-weight-bold mt-3">
                                     Total: <span style="color: #b00;">S/ {{ totalPrice }}</span>
                                 </p>
-                                <button @click.prevent="goToReservation" class="btn btn-danger btn-block"
+                                <button @click.prevent="goToReservation" id="sendReservationPack"  class="btn btn-danger btn-block"
                                     style="background-color: #b00; border-color: #b00;">
                                     Reservar
                                 </button>

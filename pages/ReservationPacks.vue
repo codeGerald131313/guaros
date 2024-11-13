@@ -9,84 +9,80 @@
             <section class="container tabs-section">
                 <div class="left-column">
                     <h2 class="title">{{ packName }}</h2>
-                    <form class="form-grid">
-                        <!-- Datos del cliente -->
-                        <div class="form-group-row">
-                            <!-- Campo Nombre -->
-                            <div class="form-group">
-                                <label for="nombre">Nombre *</label>
-                                <input type="text" v-model="nombre" class="input-field" required />
-                            </div>
+                <form @submit.prevent="goToReservation" class="form-grid" id="form_reservations_packs">
+    <!-- Datos del cliente -->
+    <div class="form-group-row">
+        <!-- Campo Nombre -->
+        <div class="form-group">
+            <label for="nombre">Nombre *</label>
+            <input type="text" v-model="nombre" class="input-field" required />
+        </div>
 
-                            <!-- Campo Apellidos -->
-                            <div class="form-group">
-                                <label for="apellidos">Apellidos *</label>
-                                <input type="text" v-model="apellidos" class="input-field" required />
-                            </div>
-                        </div>
+        <!-- Campo Apellidos -->
+        <div class="form-group">
+            <label for="apellidos">Apellidos *</label>
+            <input type="text" v-model="apellidos" class="input-field" required />
+        </div>
+    </div>
 
+    <div class="form-group full-width">
+        <label for="email">E-mail *</label>
+        <input type="email" v-model="email" class="input-field" required />
+    </div>
+    <div class="form-group full-width">
+        <label for="telefono">Teléfono *</label>
+        <input type="tel" v-model="telefono" class="input-field" required />
+    </div>
 
-                        <div class="form-group full-width">
-                            <label for="email">E-mail *</label>
-                            <input type="email" v-model="email" class="input-field" required />
-                        </div>
-                        <div class="form-group full-width">
-                            <label for="telefono">Teléfono *</label>
-                            <input type="tel" v-model="telefono" class="input-field" required />
-                        </div>
-                        <!-- Información adicional -->
-                        <div class="info-adicional">
-                            <h3>Información adicional</h3>
-                            <div class="form-group full-width">
-                                <label for="hotel">Indica el punto de recogida</label>
-                                <select v-model="hotel" class="input-field">
-                                    <option value="Hotel Monte VerdeGa">Hotel Monte Verde</option>
-                                    <option value="Otro">Otro</option>
-                                </select>
-                            </div>
-                            <div class="form-group full-width">
-                                <label for="requisito">¿Tienes algún requisito especial?</label>
-                                <input type="text" v-model="requisito" class="input-field" />
-                            </div>
-                        </div>
+    <!-- Información adicional -->
+    <div class="info-adicional">
+        <h3>Información adicional</h3>
+        <div class="form-group full-width">
+            <label for="hotel">Indica el punto de recogida</label>
+            <select v-model="hotel" class="input-field">
+                <option value="Hotel Monte VerdeGa">Hotel Monte Verde</option>
+                <option value="Otro">Otro</option>
+            </select>
+        </div>
+        <div class="form-group full-width">
+            <label for="requisito">¿Tienes algún requisito especial?</label>
+            <input type="text" v-model="requisito" class="input-field" />
+        </div>
+    </div>
 
-                        <!-- Adulto -->
-                        <div v-for="(adulto, index) in adultos" :key="index" class="form-group full-width">
-                            <h3>Adulto {{ index + 1 }}</h3>
-                            <div class="form-group">
-                                <label :for="'adultoNombre' + index">Nombre *</label>
-                                <input type="text" v-model="adulto.nombre" :id="'adultoNombre' + index"
-                                    class="input-field" required />
-                            </div>
-                            <div class="form-group">
-                                <label :for="'adultoApellidos' + index">Apellidos *</label>
-                                <input type="text" v-model="adulto.apellidos" :id="'adultoApellidos' + index"
-                                    class="input-field" required />
-                            </div>
-                        </div>
+    <!-- Adulto -->
+    <div v-for="(adulto, index) in adultos" :key="index" class="form-group full-width">
+        <h3>Adulto {{ index + 1 }}</h3>
+        <div class="form-group">
+            <label :for="'adultoNombre' + index">Nombre *</label>
+            <input type="text" v-model="adulto.nombre" :id="'adultoNombre' + index" class="input-field" required />
+        </div>
+        <div class="form-group">
+            <label :for="'adultoApellidos' + index">Apellidos *</label>
+            <input type="text" v-model="adulto.apellidos" :id="'adultoApellidos' + index" class="input-field" required />
+        </div>
+    </div>
 
-                        <!-- Infantil -->
-                        <div v-for="(infantil, index) in infantiles" :key="index" class="form-group full-width">
-                            <h3>Infantil {{ index + 1 }}</h3>
-                            <div class="form-group">
-                                <label :for="'infantilNombre' + index">Nombre</label>
-                                <input type="text" v-model="infantil.nombre" :id="'infantilNombre' + index"
-                                    class="input-field" />
-                            </div>
-                            <div class="form-group">
-                                <label :for="'infantilApellidos' + index">Apellidos</label>
-                                <input type="text" v-model="infantil.apellidos" :id="'infantilApellidos' + index"
-                                    class="input-field" />
-                            </div>
-                        </div>
+    <!-- Infantil -->
+    <div v-for="(infantil, index) in infantiles" :key="index" class="form-group full-width">
+        <h3>Infantil {{ index + 1 }}</h3>
+        <div class="form-group">
+            <label :for="'infantilNombre' + index">Nombre</label>
+            <input type="text" v-model="infantil.nombre" :id="'infantilNombre' + index" class="input-field" />
+        </div>
+        <div class="form-group">
+            <label :for="'infantilApellidos' + index">Apellidos</label>
+            <input type="text" v-model="infantil.apellidos" :id="'infantilApellidos' + index" class="input-field" />
+        </div>
+    </div>
 
-                        <div class="form-group full-width">
-                            <button @click.prevent="goToReservation" class="btn btn-danger btn-block"
-                                style="background-color: #b00; border-color: #b00;">
-                                Reservar
-                            </button>
-                        </div>
-                    </form>
+    <div class="form-group full-width">
+        <button type="submit" class="btn btn-danger btn-block" style="background-color: #b00; border-color: #b00;">
+            Reservar
+        </button>
+    </div>
+</form>
+
                 </div>
                 <!-- Columna derecha: Resumen de la reserva -->
                 <div class="right-column">

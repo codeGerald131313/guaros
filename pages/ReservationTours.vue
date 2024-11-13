@@ -9,7 +9,7 @@
             <section class="container tabs-section">
                 <div class="left-column">
                     <h2 class="title">{{ tourName }}</h2>
-                    <form class="form-grid">
+                    <form @submit.prevent="goToReservation" class="form-grid" id="form_reservations_dime1">
                         <!-- Datos del cliente -->
                         <div class="form-group-row">
                             <!-- Campo Nombre -->
@@ -39,6 +39,7 @@
                             <label for="telefono">Teléfono *</label>
                             <input type="tel" v-model="telefono" class="input-field" required />
                         </div>
+
                         <!-- Información adicional -->
                         <div class="info-adicional">
                             <h3>Información adicional</h3>
@@ -86,12 +87,13 @@
                         </div>
 
                         <div class="form-group full-width">
-                            <button @click.prevent="goToReservation" class="btn btn-danger btn-block"
+                            <button type="submit" class="btn btn-danger btn-block"
                                 style="background-color: #b00; border-color: #b00;">
                                 Reservar
                             </button>
                         </div>
                     </form>
+
                 </div>
                 <!-- Columna derecha: Resumen de la reserva -->
                 <div class="right-column">
