@@ -8,10 +8,18 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMainNav"
                         aria-controls="navbarMainNav" aria-expanded="false" aria-label="Toggle navigation">
                         <svg width="25" viewBox="0 0 20 20">
-                            <path d="M 19.9876 1.998 L -0.0108 1.998 L -0.0108 -0.0019 L 19.9876 -0.0019 L 19.9876 1.998 Z"></path>
-                            <path d="M 19.9876 7.9979 L -0.0108 7.9979 L -0.0108 5.9979 L 19.9876 5.9979 L 19.9876 7.9979 Z"></path>
-                            <path d="M 19.9876 13.9977 L -0.0108 13.9977 L -0.0108 11.9978 L 19.9876 11.9978 L 19.9876 13.9977 Z"></path>
-                            <path d="M 19.9876 19.9976 L -0.0108 19.9976 L -0.0108 17.9976 L 19.9876 17.9976 L 19.9876 19.9976 Z"></path>
+                            <path
+                                d="M 19.9876 1.998 L -0.0108 1.998 L -0.0108 -0.0019 L 19.9876 -0.0019 L 19.9876 1.998 Z">
+                            </path>
+                            <path
+                                d="M 19.9876 7.9979 L -0.0108 7.9979 L -0.0108 5.9979 L 19.9876 5.9979 L 19.9876 7.9979 Z">
+                            </path>
+                            <path
+                                d="M 19.9876 13.9977 L -0.0108 13.9977 L -0.0108 11.9978 L 19.9876 11.9978 L 19.9876 13.9977 Z">
+                            </path>
+                            <path
+                                d="M 19.9876 19.9976 L -0.0108 19.9976 L -0.0108 17.9976 L 19.9876 17.9976 L 19.9876 19.9976 Z">
+                            </path>
                         </svg>
                     </button>
 
@@ -45,12 +53,13 @@
                         <a href="/register" class="btn btn-youtube transition-hover-top">Registrarse</a>
                     </li>
                     <li v-else class="list-inline-item dropdown">
-                        <a href="#" class="dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a href="#" class="dropdown-toggle" id="userDropdown" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
                             <img :src="user.avatar" alt="User Avatar" class="rounded-circle" width="40" height="40">
                             <span class="ml-2">{{ user.name }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <nuxt-link class="dropdown-item" to="/my-reservations">Mis reservas</nuxt-link>
+                            <nuxt-link class="dropdown-item" to="/MyReservations">Mis reservas</nuxt-link>
                             <nuxt-link class="dropdown-item" to="/my-account">Mi cuenta</nuxt-link>
                             <a href="/logout" class="dropdown-item">Cerrar sesión</a>
                         </div>
@@ -75,7 +84,7 @@ export default {
     },
     methods: {
         reloadPage() {
-            if (this.$route.path === '/tours' || this.$route.path === '/') {
+            if (['/tours', '/', '/ReservationTours'].includes(this.$route.path)) {
                 location.replace(this.$route.fullPath);
             }
         }
@@ -83,7 +92,7 @@ export default {
     watch: {
         '$route'(to, from) {
             // Evita recargar si ya estamos en la misma ruta
-            if ((to.path === '/tours' || to.path === '/') && to.path !== from.path) {
+            if (['/tours', '/', '/ReservationTours'].includes(to.path) && to.path !== from.path) {
                 location.replace(to.fullPath);
             }
         }
@@ -91,10 +100,12 @@ export default {
 }
 </script>
 
+
 <style scoped>
 /* Ajusta la visibilidad del nombre del usuario */
 .dropdown-toggle span {
-    color: white; /* Ajusta el color del nombre para que sea más visible */
+    color: white;
+    /* Ajusta el color del nombre para que sea más visible */
     font-weight: bold;
 }
 

@@ -25,11 +25,11 @@
                             </div>
                         </div>
 
-<!-- Campo DNI -->
-<div class="form-group full-width">
-    <label for="dni">DNI *</label>
-    <input type="text" v-model="dni" class="input-field" required />
-</div>
+                        <!-- Campo DNI -->
+                        <div class="form-group full-width">
+                            <label for="dni">DNI *</label>
+                            <input type="text" v-model="dni" class="input-field" required />
+                        </div>
 
                         <div class="form-group full-width">
                             <label for="email">E-mail *</label>
@@ -96,8 +96,8 @@
                 <!-- Columna derecha: Resumen de la reserva -->
                 <div class="right-column">
                     <div class="tour-summary">
-                        <img src="https://r-xx.bstatic.com/xdata/images/xphoto/max1200/205207768.jpg?k=5403b79dd1e3b66c392da9c976dbb289bb75d366ddb1b9f9180ec77ab1c75898&o="
-                            alt="Imagen del tour" class="tour-image-small">
+                        <img :src="imagen_portada" alt="Imagen del tour" class="tour-image-small">
+
                         <div class="tour-details">
                             <h4>{{ tourName }}</h4>
                             <p>{{ adults }} × Adulto (edad: 4-99) - S/. {{ price_agencia }}</p>
@@ -121,21 +121,22 @@ export default {
         return {
             nombre: '',
             apellidos: '',
+            dni: '',
             email: '',
             telefono: '',
             hotel: 'Hotel Monte VerdeGa',
             requisito: '',
             adultos: [], // Array para almacenar adultos (nombre y apellidos)
             infantiles: [], // Array para almacenar infantiles (nombre y apellidos)
-
+            selectedTime: this.$route.query.selectedTime || '', // Recibe el nombre del tour
             tourName: this.$route.query.tourName || '', // Recibe el nombre del tour
             adults: parseInt(this.$route.query.adults, 10) || 0, // Cantidad de adultos
             children: parseInt(this.$route.query.children, 10) || 0, // Cantidad de niños
             price_agencia: this.$route.query.price_agencia || 0, // Precio de agencia
             totalPrice: this.$route.query.totalPrice || 0, // Precio total
             selectedDate: this.$route.query.selectedDate ? new Date(this.$route.query.selectedDate) : new Date(), // Convertir a Date
-            selectedLanguage: this.$route.query.language || 'es' // Valor predeterminado si no se recibe el idioma
-
+            selectedLanguage: this.$route.query.language || 'es', // Valor predeterminado si no se recibe el idioma
+            imagen_portada: this.$route.query.imagen_portada || ''
         };
     },
     mounted() {
@@ -148,8 +149,9 @@ export default {
             price_agencia: this.price_agencia,
             totalPrice: this.totalPrice,
             selectedDate: this.selectedDate,
-            selectedLanguage: this.selectedLanguage || 'es' // Valor predeterminado si no se recibe el idioma
-
+            selectedLanguage: this.selectedLanguage || 'es', // Valor predeterminado si no se recibe el idioma
+            selectedTime: this.selectedTime,
+            imagen_portada: this.imagen_portada
         });
     },
     methods: {

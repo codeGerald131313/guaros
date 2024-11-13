@@ -25,11 +25,11 @@
               <div class="mt-4">
 
                 <a aria-label="See our video" :href="linkVideo" data-ajax-modal-type="video"
-   data-ajax-modal-size="modal-xl" data-ajax-modal-centered="true"
-   class="btn video-btn transition-hover-top mb-3 d-block-xs js-ajax-modal d-inline-flex">
-   <i class="fa fa-play video-icon"></i>
-   Ver Video
-</a>
+                  data-ajax-modal-size="modal-xl" data-ajax-modal-centered="true"
+                  class="btn video-btn transition-hover-top mb-3 d-block-xs js-ajax-modal d-inline-flex">
+                  <i class="fa fa-play video-icon"></i>
+                  Ver Video
+                </a>
 
 
               </div>
@@ -114,8 +114,21 @@
               <!-- Time selection (fuera del card) -->
               <div class="mb-3">
                 <p style="color: #b00;">Selecciona una hora:</p>
-                <button class="btn btn-outline-danger" style="border-color: #b00; color: #b00;">15:00</button>
+                <div>
+                  <!-- Botones para seleccionar la hora -->
+                  <button 
+  v-for="time in availableTimes" 
+  :key="time" 
+  @click="selectedTime = time"
+  :class="['btn', 'btn-custom-danger', { active: selectedTime === time }]" 
+  style="margin-right: 5px;"
+>
+  {{ time }}
+</button>
+
+                </div>
               </div>
+
 
               <div class="booking-widget-container" style="position: relative;">
                 <div class="booking-widget border p-3 rounded shadow-sm mt-4 sticky-form" style="border-color: #b00;">
@@ -125,10 +138,10 @@
 
                   <!-- Language and ticket options -->
                   <label style="color: #b00;">Idioma</label>
-<select v-model="selectedLanguage" class="form-control mb-3" style="border-color: #b00;">
-  <option value="es">Español - Guía turístico</option>
-  <option value="en">Inglés - Guía turístico</option>
-</select>
+                  <select v-model="selectedLanguage" class="form-control mb-3" style="border-color: #b00;">
+                    <option value="es">Español - Guía turístico</option>
+                    <option value="en">Inglés - Guía turístico</option>
+                  </select>
 
                   <!-- Tickets selection -->
                   <!-- Adult Section -->
@@ -328,6 +341,8 @@
 export default {
   data() {
     return {
+      availableTimes: ["10:00", "12:00", "15:00", "18:00"],
+      selectedTime: "15:00", // Horario predeterminado
       adults: 0, // Default value for adults
       children: 0, // Default value for children
       tourName: '',
@@ -443,12 +458,14 @@ export default {
         path: '/ReservationTours',
         query: {
           tourName: this.tourName,
+          selectedTime: this.selectedTime,
           adults: this.adults,
           children: this.children,
           price_agencia: this.price_agencia,
           totalPrice: this.totalPrice,
           selectedDate: this.displayedDates[this.selectedDate], // Enviamos la fecha completa
-          language: this.selectedLanguage // Enviar el idioma seleccionado
+          language: this.selectedLanguage, // Enviar el idioma seleccionado
+          imagen_portada: this.imagePortadaUrl // URL de la imagen de portada
 
         }
       };
@@ -551,6 +568,16 @@ export default {
   justify-content: center;
 }
 
+.btn-custom-danger.active,
+.btn-custom-danger:hover {
+  background-color: #b00;
+  color: white;
+}
+.btn-custom-danger {
+  color: #b00;
+  border-color: #b00;
+  background-color: transparent;
+}
 .date-btn {
   background-color: transparent;
   border: 2px solid #b00;
@@ -587,21 +614,28 @@ export default {
   cursor: pointer;
   transition: color 0.3s, transform 0.2s;
 }
+
 /* Clase para el botón */
 .video-btn {
-  background-color: #ffeb3b; /* Cambia el color de fondo según lo que desees */
-  color: #000; /* Color del texto */
+  background-color: #ffeb3b;
+  /* Cambia el color de fondo según lo que desees */
+  color: #000;
+  /* Color del texto */
   display: inline-flex;
-  align-items: center; /* Alinea el ícono y el texto verticalmente */
-  padding: 8px 16px; /* Ajusta el padding del botón */
+  align-items: center;
+  /* Alinea el ícono y el texto verticalmente */
+  padding: 8px 16px;
+  /* Ajusta el padding del botón */
   border-radius: 4px;
   text-decoration: none;
 }
 
 /* Clase para el ícono dentro del botón */
 .video-icon {
-  margin-right: 8px; /* Espacio entre el ícono y el texto */
-  font-size: 18px; /* Ajusta el tamaño del ícono */
+  margin-right: 8px;
+  /* Espacio entre el ícono y el texto */
+  font-size: 18px;
+  /* Ajusta el tamaño del ícono */
   vertical-align: middle;
 }
 
