@@ -4,6 +4,7 @@
         <div id="wrapper">
             <Header />
             <nuxt />
+            <DialogflowWidget />
             <Footer />
         </div>
     </body>
@@ -11,6 +12,7 @@
 
 <script>
 
+import DialogflowWidget from '../components/DialogflowWidget.vue';
 import Footer from '../components/Footer.vue';
 import Header from '../components/Header.vue';
 
@@ -18,6 +20,7 @@ export default {
     name: 'default',
     components: {
         Header,
+        DialogflowWidget,
         Footer,
     }
 }
